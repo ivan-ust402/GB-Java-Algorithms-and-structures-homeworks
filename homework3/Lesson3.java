@@ -7,14 +7,18 @@ public class Lesson3 {
         myLinkedList.add(1);
         myLinkedList.add(2);
         myLinkedList.add(3); 
-        System.out.println(myLinkedList);
-        System.out.println(myLinkedList.getFirst());
-        System.out.println(myLinkedList.get(0));
-        System.out.println(myLinkedList.get(1));
-        System.out.println(myLinkedList.get(2));
-        System.out.println(myLinkedList.pop(2));
-        System.out.println(myLinkedList);
-        System.out.println(myLinkedList.popFirst());
-        System.out.println(myLinkedList);
+        System.out.println("Лист: " + myLinkedList);
+        System.out.println("Get first: " + myLinkedList.getFirst());
+        System.out.println("Get of 0: " + myLinkedList.get(0));
+        System.out.println("Get of 1: " + myLinkedList.get(1));
+        System.out.println("Get of 2: " + myLinkedList.get(2));
+        System.out.println("size: " + myLinkedList.size());
+        System.out.println("Удаление по индексу: " + myLinkedList.pop(2));
+        System.out.println("size: " + myLinkedList.size());
+        System.out.println("Лист: " + myLinkedList);
+        System.out.println("Удалить первый: " + myLinkedList.popFirst());
+        System.out.println("size: " + myLinkedList.size());
+        System.out.println("Лист:" + myLinkedList);
+        System.out.println("size: " + myLinkedList.size());
     } 
 }

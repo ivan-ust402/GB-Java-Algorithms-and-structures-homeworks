@@ -38,6 +38,21 @@ public class MyLinkedList<T> {
         }
     }
 
+    public int size() {
+        if (head == null) {
+            return 0; 
+        } 
+
+        Node<T> cursor = head;
+        int length = 1;
+
+        while (cursor.next != null ) {
+                length++;
+                cursor = cursor.next;
+            }
+        return length;     
+    }
+
     public T getFirst() {
         return get(0); 
     }

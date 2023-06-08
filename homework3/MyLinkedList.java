@@ -1,46 +1,56 @@
 package homeworks.homework3;
 
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
-    private Node head;
-    private class Node {
-        int value;
-        Node next;
+    private Node<T> head;
 
-        public Node(int value) {
+    // Домашнее задание:
+    // Реализовать в классе MyLinkedList следующие методы:
+    // 1. public int size() - получение размера списка, проитерироваться по структуре 
+    // 1.1* Можно завети переменную и поддерживать ее
+    // 2. public boolean contains(T value) Проверка наличия элемента по значению 
+    // 3. public T popLast() удалить последний. Если спиок пустой - ошибка.
+    // 4. * Переделать все значения int на T, чтобы можно было хранить значения всех типов
+    // 5. * public MyLinkedList reverse() - создать Новый список порядок, в котором  обратный текущему 
+
+    private class Node<T> {
+        T value;
+        Node<T> next;
+
+        public Node(T value) {
             this.value = value;
         }
 
-        public Node(int value, Node next) {
+        public Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
         }
     }
 
-    public void add(int value) {
+    public void add(T value) {
         // Добавляем в конец нашего списка значение
-        Node lastNode = findLast();
+        Node<T> lastNode = findLast();
 
         if(lastNode == null) {
-            head = new Node(value);
+            head = new Node<T>(value);
         } else {
-            lastNode.next = new Node(value);
+            lastNode.next = new Node<T>(value);
         }
     }
 
-    public int getFirst() {
+    public T getFirst() {
         return get(0); 
     }
 
 
-    public int get(int index) {
+    public T get(int index) {
         if (head == null) {
             throw new IllegalStateException("Список пустой!"); 
         } else if (index < 0) {
             throw new IndexOutOfBoundsException(index ) ; 
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
         int indexCursor = 0;
 
         while (cursor != null) {
@@ -53,7 +63,11 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException();
     }
 
-    public int pop(int index) {
+    public T popFirst() {
+        return pop(0);
+    }
+
+    public T pop(int index) {
         if (head == null) {
             throw new IllegalStateException("Список пустой!"); 
         } else if (index < 0) {
@@ -61,12 +75,12 @@ public class MyLinkedList {
         }
 
         if (index == 0) {
-            int pop = head.value;
+            T pop = head.value;
             head = head.next; 
             return pop;
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
         int indexCursor = 1;
 
         while (cursor.next != null ) {
@@ -74,7 +88,7 @@ public class MyLinkedList {
                 if(head.next == null) {
                     throw new IndexOutOfBoundsException(index) ; 
                 }
-                int pop = cursor.next.value;
+                T pop = cursor.next.value;
                 cursor.next = cursor.next.next;
                 return pop;
             }
@@ -84,12 +98,12 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException(); 
     }
 
-    private Node findLast() {
+    private Node<T> findLast() {
         if (head == null) {
             return null; 
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
 
         while (cursor.next != null) {
             cursor = cursor.next;
@@ -101,7 +115,7 @@ public class MyLinkedList {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("[");
-        Node cursor = head;
+        Node<T> cursor = head;
         while (cursor != null) {
             result.append(cursor.value).append(" ->  ");
             cursor = cursor.next;

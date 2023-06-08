@@ -28,6 +28,26 @@ public class MyLinkedList {
         }
     }
 
+    public int get(int index) {
+        if (head == null) {
+            throw new IllegalStateException("Список пустой!"); 
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException(index ) ; 
+        }
+
+        Node cursor = head;
+        int indexCursor = 0;
+
+        while (cursor != null) {
+            if (indexCursor == index) {
+                return cursor.value;
+            }
+            cursor = cursor.next;
+            indexCursor++;
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
     private Node findLast() {
         if (head == null) {
             return null; 
@@ -35,7 +55,7 @@ public class MyLinkedList {
 
         Node cursor = head;
 
-        while (cursor.next == null) {
+        while (cursor.next != null) {
             cursor = cursor.next;
         }
 
@@ -48,6 +68,7 @@ public class MyLinkedList {
         Node cursor = head;
         while (cursor != null) {
             result.append(cursor.value).append(" ->  ");
+            cursor = cursor.next;
         }  
 
         int length = result.length();

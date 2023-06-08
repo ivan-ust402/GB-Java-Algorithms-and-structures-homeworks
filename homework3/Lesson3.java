@@ -23,5 +23,7 @@ public class Lesson3 {
         System.out.println("Contains 2: " + myLinkedList.contains(2));
         System.out.println("Contains 1: " + myLinkedList.contains(1));
         System.out.println("Contains 3: " + myLinkedList.contains(3));
+        System.out.println("PopLast: " + myLinkedList.popLast());
+        System.out.println("List: " + myLinkedList);
     } 
 }

@@ -69,6 +69,8 @@ public class MyLinkedList<T> {
         return false;
     }
 
+
+
     public T getFirst() {
         return get(0); 
     }
@@ -96,6 +98,11 @@ public class MyLinkedList<T> {
 
     public T popFirst() {
         return pop(0);
+    }
+
+    public T popLast() {
+        int last = size() - 1;
+        return pop(last);
     }
 
     public T pop(int index) {

@@ -28,6 +28,11 @@ public class MyLinkedList {
         }
     }
 
+    public int getFirst() {
+        return get(0); 
+    }
+
+
     public int get(int index) {
         if (head == null) {
             throw new IllegalStateException("Список пустой!"); 
@@ -46,6 +51,39 @@ public class MyLinkedList {
             indexCursor++;
         }
         throw new IndexOutOfBoundsException();
+    }
+
+    public void delete(int index) {
+        if (head == null) {
+            throw new IllegalStateException("Список пустой!"); 
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException(index); 
+        }
+
+        if (index == 0) {
+            if (head == null) {
+                throw new IndexOutOfBoundsException(index); 
+            } else {
+                head = head.next; 
+            }
+            return;
+        }
+
+        Node cursor = head;
+        int indexCursor = 1;
+
+        while (head.next != null ) {
+            if (indexCursor == index) {
+                if(head.next == null) {
+                    throw new IndexOutOfBoundsException(index) ; 
+                }
+                head.next = head.next.next;
+                return;
+            }
+            cursor = cursor.next;
+            indexCursor++;
+        }
+        throw new IndexOutOfBoundsException(); 
     }
 
     private Node findLast() {

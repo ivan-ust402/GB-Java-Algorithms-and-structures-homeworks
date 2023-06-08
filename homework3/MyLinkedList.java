@@ -53,7 +53,7 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException();
     }
 
-    public void delete(int index) {
+    public int pop(int index) {
         if (head == null) {
             throw new IllegalStateException("Список пустой!"); 
         } else if (index < 0) {
@@ -61,24 +61,22 @@ public class MyLinkedList {
         }
 
         if (index == 0) {
-            if (head == null) {
-                throw new IndexOutOfBoundsException(index); 
-            } else {
-                head = head.next; 
-            }
-            return;
+            int pop = head.value;
+            head = head.next; 
+            return pop;
         }
 
         Node cursor = head;
         int indexCursor = 1;
 
-        while (head.next != null ) {
+        while (cursor.next != null ) {
             if (indexCursor == index) {
                 if(head.next == null) {
                     throw new IndexOutOfBoundsException(index) ; 
                 }
-                head.next = head.next.next;
-                return;
+                int pop = cursor.next.value;
+                cursor.next = cursor.next.next;
+                return pop;
             }
             cursor = cursor.next;
             indexCursor++;

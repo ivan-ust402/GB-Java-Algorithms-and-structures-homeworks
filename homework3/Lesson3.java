@@ -12,7 +12,7 @@ public class Lesson3 {
         System.out.println(myLinkedList.get(0));
         System.out.println(myLinkedList.get(1));
         System.out.println(myLinkedList.get(2));
-        myLinkedList.delete(0);
+        System.out.println(myLinkedList.pop(2));
         System.out.println(myLinkedList);
-    }
+    } 
 }

@@ -19,11 +19,12 @@ public class MyLinkedList {
 
     public void add(int value) {
         // Добавляем в конец нашего списка значение
-        if (head == null) {
+        Node lastNode = findLast();
+
+        if(lastNode == null) {
             head = new Node(value);
         } else {
-            Node last = findLast();
-            last.next = new Node(value);
+            lastNode.next = new Node(value);
         }
     }
 
@@ -39,5 +40,21 @@ public class MyLinkedList {
         }
 
         return cursor;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node cursor = head;
+        while (cursor != null) {
+            result.append(cursor.value).append(" ->  ");
+        }  
+
+        int length = result.length();
+        if(length > 4) {
+            result.delete(length - 4, length);
+        }
+        result.append("]");
+        return result.toString();
     }
 }

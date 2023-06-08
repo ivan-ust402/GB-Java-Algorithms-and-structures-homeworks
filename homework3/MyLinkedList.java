@@ -53,6 +53,22 @@ public class MyLinkedList<T> {
         return length;     
     }
 
+    public boolean contains(T value){
+        if (head == null) {
+            throw new IllegalStateException("Список пустой!"); 
+        } 
+
+        Node<T> cursor = head;
+
+        while (cursor != null) {
+            if (cursor.value == value) {
+                return true;
+            }
+            cursor = cursor.next;
+        }
+        return false;
+    }
+
     public T getFirst() {
         return get(0); 
     }

@@ -20,5 +20,8 @@ public class Lesson3 {
         System.out.println("size: " + myLinkedList.size());
         System.out.println("Лист:" + myLinkedList);
         System.out.println("size: " + myLinkedList.size());
+        System.out.println("Contains 2: " + myLinkedList.contains(2));
+        System.out.println("Contains 1: " + myLinkedList.contains(1));
+        System.out.println("Contains 3: " + myLinkedList.contains(3));
     } 
 }

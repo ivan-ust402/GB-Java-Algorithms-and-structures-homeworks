@@ -15,10 +15,19 @@ public class Lesson4 {
         System.out.println(tree.contains(8));
         System.out.println(tree.contains(1));
         System.out.println(tree.contains(3));
-        System.out.println(tree.contains(12));
-
+        System.out.println(tree.contains(12)); 
+ 
         System.out.println(tree.contains(4));
         System.out.println(tree.contains(2));
         System.out.println(tree.contains(14));
+
+        System.out.println();
+        tree.remove(8);
+        tree.remove(12);
+        tree.remove(12);
+        System.out.println(tree.contains(8));
+        System.out.println(tree.contains(1));
+        System.out.println(tree.contains(3));
+        System.out.println(tree.contains(12));
     }
 }

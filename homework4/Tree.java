@@ -52,4 +52,25 @@ public class Tree {
 
         }
     }
+
+    public boolean contains(int value) {
+        // Попытаться найти узел, значение которого равно value
+        // Если узла нет, то false
+        return findNode(root, value) != null;
+    }
+
+    private Node findNode(Node current, int value) {
+        if (current == null) {
+            return null;
+        }
+        //  Найти узел в дереве current значение которого равно value
+        if (current.value == value) {
+            return current; 
+        } else if (current.value > value) {
+            return findNode(current.left, value);
+        } else { // current.value < value
+            return findNode(current.right, value); 
+        }
+
+    }
 }

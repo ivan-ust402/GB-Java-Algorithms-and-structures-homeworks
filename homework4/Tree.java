@@ -1,10 +1,12 @@
 package homeworks.homework4;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
-public class Tree {
+public class Tree<T extends Comparable<T>> {
     // Нужно реализовать структуру, которая умеет делать следующее:
     // 1. Вставка значения
     // 2. Поиск значения (проверка, есть ли значение или нет)
@@ -12,21 +14,21 @@ public class Tree {
     // DFS Depth-first-search - поиск в глубину
     // BFS Breath-first-search - поиск в ширину 
 
-    private class Node {
-        int value;
-        Node left;
-        Node right;
+    private class Node<T> {
+        T value;
+        Node<T> left;
+        Node<T> right;
 
-        Node(int value) {
+        Node(T value) {
             this.value = value;
         }
     }
 
-    private Node root;
+    private Node<T> root;
 
-    public boolean add(int value) {
+    public boolean add(T value) {
         if (root == null) {
-            root = new Node(value);
+            root = new Node<T>(value);
             return true;
         }
 
@@ -35,22 +37,22 @@ public class Tree {
         
     }
 
-    private boolean addNode(Node current, int value) {
-        if (value == current.value){
+    private boolean addNode(Node<T> current, T value) {
+        if (value.compareTo(current.value) == 0){
             return false;
-        } else if (value < current.value) {
+        } else if (value.compareTo(current.value) < 0) {
             if (current.left == null) {
                  // Вставляем в левое поддерево
-                 current.left = new Node(value);
+                 current.left = new Node<T>(value);
                  return true;
             } else {
                 return addNode(current.left, value);
             }
             
-        } else { // value > root.value
+        } else { // value > root.value или value.compareTo(current.value) > 0
             if (current.right == null) {
                 // Вставляем в правое поддерево
-                current.right = new Node(value);
+                current.right = new Node<T>(value);
                 return true;
            } else {
                return addNode(current.right, value);
@@ -59,20 +61,20 @@ public class Tree {
         }
     }
 
-    public boolean contains(int value) {
+    public boolean contains(T value) {
         // Попытаться найти узел, значение которого равно value
         // Если узла нет, то false
         return findNode(root, value) != null;
     }
 
-    private Node findNode(Node current, int value) {
+    private Node<T> findNode(Node<T> current, T value) {
         if (current == null) {
             return null;
         }
         //  Найти узел в дереве current значение которого равно value
-        if (current.value == value) {
+        if (value.compareTo(current.value) == 0) {
             return current; 
-        } else if (current.value > value) {
+        } else if (value.compareTo(current.value) < 0) {
             return findNode(current.left, value);
         } else { // current.value < value
             return findNode(current.right, value); 
@@ -80,20 +82,20 @@ public class Tree {
 
     }
 
-    public void remove(int value) {
+    public void remove(T value) {
         root = removeNode(root, value);
     }
 
-    private Node removeNode(Node current, int value) {
+    private Node<T> removeNode(Node<T> current, T value) {
         if(current == null) {
             return null;
         }
 
-        if(value < current.value) {
+        if(value.compareTo(current.value) < 0) {
             // Нужно удалить в левом поддереве
             current.left = removeNode(current.left, value);
             return current;
-        } else if(value < current.value) {
+        } else if(value.compareTo(current.value) > 0) {
             // Удалить в правом поддереве
             current.right = removeNode(current.right, value);
             return current;
@@ -116,37 +118,37 @@ public class Tree {
         // 3. Есть оба дочерних узла
         // Нужно найти минимальный элемент справа или максимальный слева
         // Нужно
-        Node smallestNodeOnTheRight  = findFirst(current.right);
-        int smallestValueOnTheRight  = smallestNodeOnTheRight.value;
+        Node<T> smallestNodeOnTheRight  = findFirst(current.right);
+        T smallestValueOnTheRight  = smallestNodeOnTheRight.value;
         current.value = smallestValueOnTheRight; 
         current.right = removeNode(current.right, smallestValueOnTheRight);
         return current;
     }
 
-    public int findFirst() {
+    public T findFirst() {
         if (root == null) {
             throw new NoSuchElementException();
         }
         return findFirst(root).value;
     }
     // Поиск минимального элемента в каком-то дереве
-    private Node findFirst(Node current){
+    private Node<T> findFirst(Node<T> current){
         if (current.left == null) {
             return current;
         }
         return findFirst(current.left);
     }
 
-    public List<Integer> dfs() {
+    public List<T> dfs() {
         if(root == null) {
             return List.of(); 
         }
-        List<Integer> list = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         dfs(root, list);
         return list; 
     }
 
-    private void dfs(Node current, List<Integer> result) {
+    private void dfs(Node<T> current, List<T> result) {
         // In -order
         if(current.left != null) {
              dfs(current.left, result);
@@ -155,5 +157,27 @@ public class Tree {
         if(current.right != null) {
             dfs(current.right, result);
        }
+    }
+
+    public List<T> bfs() {
+        if(root == null) {
+            return List.of();
+        }
+        List<T> result = new ArrayList<>();
+        Queue<Node<T>> nodes = new LinkedList<>();
+
+        nodes.add(root);
+
+        while(!nodes.isEmpty()) {
+            Node<T> next = nodes.poll(); 
+            result.add(next.value);
+            if(next.left != null) {
+                 nodes.add(next.left);  
+            }
+            if(next.right != null) {
+                nodes.add(next.right );  
+            }
+        }
+        return result; 
     }
 }

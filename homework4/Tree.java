@@ -11,17 +11,45 @@ public class Tree {
         Node left;
         Node right;
 
-        public Node(int value) {
+        Node(int value) {
             this.value = value;
         }
     }
 
     private Node root;
 
-    public void add(int value) {
+    public boolean add(int value) {
         if (root == null) {
             root = new Node(value);
-            return;
+            return true;
+        }
+
+        return addNode(root, value);
+
+        
+    }
+
+    private boolean addNode(Node current, int value) {
+        if (value == current.value){
+            return false;
+        } else if (value < current.value) {
+            if (current.left == null) {
+                 // Вставляем в левое поддерево
+                 current.left = new Node(value);
+                 return true;
+            } else {
+                return addNode(current.left, value);
+            }
+            
+        } else { // value > root.value
+            if (current.right == null) {
+                // Вставляем в правое поддерево
+                current.right = new Node(value);
+                return true;
+           } else {
+               return addNode(current.right, value);
+           }
+
         }
     }
 }

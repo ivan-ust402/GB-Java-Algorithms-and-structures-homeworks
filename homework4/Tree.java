@@ -1,10 +1,16 @@
 package homeworks.homework4;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 public class Tree {
     // Нужно реализовать структуру, которая умеет делать следующее:
     // 1. Вставка значения
     // 2. Поиск значения (проверка, есть ли значение или нет)
     // 3, Удаление значения 
+    // DFS Depth-first-search - поиск в глубину
+    // BFS Breath-first-search - поиск в ширину 
 
     private class Node {
         int value;
@@ -117,11 +123,37 @@ public class Tree {
         return current;
     }
 
+    public int findFirst() {
+        if (root == null) {
+            throw new NoSuchElementException();
+        }
+        return findFirst(root).value;
+    }
     // Поиск минимального элемента в каком-то дереве
     private Node findFirst(Node current){
         if (current.left == null) {
             return current;
         }
         return findFirst(current.left);
+    }
+
+    public List<Integer> dfs() {
+        if(root == null) {
+            return List.of(); 
+        }
+        List<Integer> list = new ArrayList<>();
+        dfs(root, list);
+        return list; 
+    }
+
+    private void dfs(Node current, List<Integer> result) {
+        // In -order
+        if(current.left != null) {
+             dfs(current.left, result);
+        }
+        result.add(current.value); 
+        if(current.right != null) {
+            dfs(current.right, result);
+       }
     }
 }
